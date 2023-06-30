@@ -22,15 +22,32 @@
     <div class="container">
         <div class="library">
         </div>
-        <button id="new">NEW BOOK</button>
+        <button id="new">
+            <img src="./icons/plus.svg" width="45" height="45">
+            <img src="./icons/book-open-variant.svg" width="45" height="45">
+        </button>
     </div>
 
     <div id="overlay" class="hidden"></div>
 
     <div id="formModal" class="hidden">
         <form id="bookForm">
-            <input type="text" placeholder="non">
-            <input type="submit" value="Submit">
+            <div class="top">
+                <h1>New book</h1>
+                <button class="close">
+                    <img src="./icons/close-box.svg" width="30" height="30">
+                </button>
+            </div>
+
+            <input type="text" name="title" id="title" title="Input the title of the book" placeholder="Title" required>
+            <input type="text" name="author" id="author" title="Input the author of the book" placeholder="Author" required>
+            <input type="number" name="pages" id="pages" title="Input the number of pages of the book" placeholder="Number of pages" required>
+
+            <div class="read">
+                <label for="read">Have you read the book?</label>
+                <input type="checkbox" name="read" id="read" title="Check if you have read the book">
+            </div>
+            <input type="submit" id="submit" value="Add Book">
         </form>
     </div>
 
