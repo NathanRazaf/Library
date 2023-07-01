@@ -53,7 +53,7 @@ html, body {
 
 .library{
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
     justify-items: center;
     gap: 10px;
     margin: 20px;
@@ -171,13 +171,14 @@ html, body {
 
 .bookCard {
     display: flex;
+    overflow-wrap: anywhere;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
     border: 1px solid black;
     border-radius: 15px;
     padding: 20px;
-    width: 70%;
+    width: min(250px, 80%);
     background-color: #e0f2fe;
 }
 
@@ -185,4 +186,37 @@ html, body {
     background-color: #7dd3fc;
     padding: 10px;
     border-radius: 8px;
+    width: 90%;
+    text-align: end;
+    font-style: italic;
 }
+
+.bookCard .delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    align-self: center;
+}
+
+.bookCard .delete:hover {
+    transform: scale(1.1);
+}
+
+.readBtn {
+    padding: 15px 25px;
+    width: fit-content;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #0ea5e9;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.readBtn:hover {
+    transform: translateY(5px);
+}
+

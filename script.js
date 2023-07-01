@@ -16,7 +16,6 @@ bookForm.addEventListener("submit", function(e) {
     addBookToLibrary();
     overlay.classList.add("hidden");
     formModal.classList.add("hidden");
-    displayBooks();
     bookForm.reset();
 });
 
@@ -39,26 +38,60 @@ function addBookToLibrary() {
     let read = bookForm.elements["read"].checked;
     let book = new Book(title, author, pages, read);
     myLibrary.push(book);
-    console.log(myLibrary);
+    library.appendChild(createBook(book));
 }
 function displayBooks() {
     library.innerHTML= "";
     myLibrary.forEach(function(book) {
-        let bookCard = document.createElement("div");
-        bookCard.classList.add("bookCard");
-        let title = document.createElement("h2");
-        title.textContent = book.title;
-        let author = document.createElement("h3");
-        author.textContent = book.author;
-        let pages = document.createElement("h3");
-        pages.textContent = book.pages;
-        let read = document.createElement("h3");
-        read.textContent = book.read ? "Read" : "Not Read";
-        read.style.color = book.read ? "green" : "red";
-        bookCard.appendChild(title);
-        bookCard.appendChild(author);
-        bookCard.appendChild(pages);
-        bookCard.appendChild(read);
+        let bookCard= createBook(book);
         library.appendChild(bookCard);
     });
+}
+
+function createBook(book) {
+    let bookCard = document.createElement("div");
+    bookCard.classList.add("bookCard");
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("delete");
+
+    let img = document.createElement("img");
+    img.setAttribute("src", "./icons/close-box.svg");
+    img.setAttribute("width", "40");
+    img.setAttribute("height", "40");
+    deleteBtn.appendChild(img);
+
+    deleteBtn.addEventListener("click", function() {
+        myLibrary.splice(myLibrary.indexOf(book), 1);
+        displayBooks();
+    });
+
+    let title = document.createElement("h2");
+    title.textContent = book.title;
+    let author = document.createElement("h3");
+    author.textContent = "By: "+ book.author;
+    let pages = document.createElement("h3");
+    pages.textContent = book.pages + " pages"
+    let read = document.createElement("button");
+    read.classList.add("readBtn");
+    read.addEventListener("click", () => changeReadStatus(book, read));
+    read.textContent = book.read ? "Read" : "Not Read";
+    read.style.backgroundColor = book.read ? "green" : "red";
+
+    bookCard.appendChild(deleteBtn);
+    bookCard.appendChild(title);
+    bookCard.appendChild(author);
+    bookCard.appendChild(pages);
+    bookCard.appendChild(read);
+    return bookCard;
+}
+
+function changeReadStatus(book, readBtn) {
+    book.read = !book.read;
+    updateReadButton(book, readBtn);
+}
+
+function updateReadButton(book, readBtn) {
+    readBtn.textContent = book.read ? "Read" : "Not Read";
+    readBtn.style.backgroundColor = book.read ? "green" : "red";
 }
