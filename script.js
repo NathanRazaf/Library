@@ -25,11 +25,21 @@ closeBtn.addEventListener("click", function() {
     bookForm.reset();
 })
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = Boolean(read);
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = Boolean(read);
+    }
+
+    get getRead() {
+        return this.read;
+    }
+    set setRead(read) {
+        this.read = read;
+    }
+
 }
 function addBookToLibrary() {
     let title = bookForm.elements["title"].value;
@@ -87,7 +97,7 @@ function createBook(book) {
 }
 
 function changeReadStatus(book, readBtn) {
-    book.read = !book.read;
+    book.setRead = !book.getRead;
     updateReadButton(book, readBtn);
 }
 
